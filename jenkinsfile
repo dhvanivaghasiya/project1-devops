@@ -1,0 +1,18 @@
+pipeline {
+ agent any
+
+ stages {
+
+  stage('Build Image') {
+   steps {
+    sh 'docker build -t dhvani-image .'
+   }
+  }
+
+  stage('Run Container') {
+   steps {
+    sh 'docker run -d -p 8085:80 --name dhvani-container dhvani-image || true'
+   }
+  }
+ }
+}
